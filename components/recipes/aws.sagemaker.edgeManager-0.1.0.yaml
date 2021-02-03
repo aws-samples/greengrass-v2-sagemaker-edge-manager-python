@@ -1,0 +1,46 @@
+---
+RecipeFormatVersion: 2020-01-25
+ComponentName: aws.sagemaker.edgeManager
+ComponentVersion: 0.1.0
+ComponentDescription: Deploys Sagemaker Edge Manager binary
+ComponentPublisher: Amazon Web Services, Inc.
+ComponentConfiguration:
+  DefaultConfiguration:
+    deviceName: sagemaker-ggv2-smem-device-012345678
+    deviceFleetName: ggv2-smem-fleet
+    bucketName: YOUR_BUCKET_NAME
+    endpoint: arn:aws:iot:<AWS_REGION>:<ACCOUNT_NUMBER>:rolealias/SageMakerEdge-ggv2-smem-fleet
+ComponentDependencies:
+  aws.greengrass.TokenExchangeService:
+    VersionRequirement: '>=0.0.0'
+    DependencyType: HARD
+Manifests:
+  - Platform:
+      os: linux
+      architecture: aarch64
+    Lifecycle:
+      install: |-
+        chmod +x {artifacts:path}/sagemaker_edge_agent_binary
+        mkdir -p certificates
+        rm -f certificates/*
+        cp {artifacts:path}/$AWS_REGION.pem ./certificates/$AWS_REGION.pem
+        rm sagemaker_edge_config.json
+        cp {artifacts:path}/sagemaker_edge_config.json .
+        chmod +w sagemaker_edge_config.json
+        sed -i -e "s|AWS_REGION|$AWS_DEFAULT_REGION|" sagemaker_edge_config.json
+        sed -i -e "s|DEVICE_NAME|{configuration:/deviceName}|" sagemaker_edge_config.json
+        sed -i -e "s|DEVICE_FLEET_NAME|{configuration:/deviceFleetName}|" sagemaker_edge_config.json
+        sed -i -e "s|BUCKET_NAME|{configuration:/bucketName}|" sagemaker_edge_config.json
+        sed -i -e "s|ENDPOINT|{configuration:/endpoint}|" sagemaker_edge_config.json
+      run:
+        script: |-
+          rm /tmp/sagemaker_edge_agent_example.sock
+          {artifacts:path}/sagemaker_edge_agent_binary -a /tmp/sagemaker_edge_agent_example.sock -c sagemaker_edge_config.json
+    Artifacts:
+      - URI: s3://YOUR_BUCKET_NAME/artifacts/aws.sagemaker.edgeManager/0.1.0/sagemaker_edge_agent_binary
+        Permission:
+          Execute: OWNER
+      - URI: s3://YOUR_BUCKET_NAME/artifacts/aws.sagemaker.edgeManager/0.1.0/sagemaker_edge_config.json
+        Permission:
+          Execute: OWNER
+      - URI: s3://YOUR_BUCKET_NAME/artifacts/aws.sagemaker.edgeManager/0.1.0/<AWS_REGION>.pem

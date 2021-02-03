@@ -1,0 +1,17 @@
+---
+RecipeFormatVersion: 2020-01-25
+ComponentName: com.model.mxnet_gluoncv_ssd
+ComponentVersion: 0.1.0
+ComponentDescription: A demo MXNet + GluonCV object detection model for SageMaker Edge Manager.
+ComponentPublisher: Amazon Web Services, Inc.
+Manifests:
+  - Platform:
+      os: linux
+      architecture: aarch64
+    Lifecycle:
+      Install: |-
+        tar xf {artifacts:path}/gluoncv-model-1.0.tar.gz
+    Artifacts:
+      - URI: s3://YOUR_BUCKET_NAME/models/packaged/gluoncv-model-1.0.tar.gz
+      - URI: s3://YOUR_BUCKET_NAME/artifacts/com.model.mxnet_gluoncv_ssd/0.1.0/rush_hour.jpg
+      - URI: s3://YOUR_BUCKET_NAME/artifacts/com.model.mxnet_gluoncv_ssd/0.1.0/rush_hour.jpg.license
