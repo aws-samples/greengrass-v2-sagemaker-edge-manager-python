@@ -1,9 +1,10 @@
-import grpc
-import sys
-import cv2
-import numpy as np
 import random
+import sys
+
 import agent_pb2_grpc
+import cv2
+import grpc
+import numpy as np
 from agent_pb2 import (ListModelsRequest, LoadModelRequest, PredictRequest,
                        UnLoadModelRequest, DescribeModelRequest, Tensor, TensorMetadata)
 
@@ -15,6 +16,7 @@ tensor_shape = [1, 3, SIZE, SIZE]
 image_url = sys.argv[1]
 
 print('IMAGE URL IS {}'.format(image_url))
+
 
 def run():
     with grpc.insecure_channel('unix:///tmp/sagemaker_edge_agent_example.sock') as channel:
@@ -38,7 +40,7 @@ def run():
         std = [58.393, 57.12, 57.375]
 
         img = cv2.imread(image_url)
-        frame = resize_short_within(img, short=SIZE, max_size=SIZE*2)
+        frame = resize_short_within(img, short=SIZE, max_size=SIZE * 2)
         nn_input_size = SIZE
         nn_input = cv2.resize(frame, (nn_input_size, int(nn_input_size / 4 * 3)))
         nn_input = cv2.copyMakeBorder(nn_input, int(nn_input_size / 8), int(nn_input_size / 8),
@@ -61,25 +63,25 @@ def run():
 
         # read output tensors
         i = 0
-        test_detections = []
+        detections = []
 
         for t in response.tensors:
             print("Flattened RAW Output Tensor : " + str(i + 1))
             i += 1
             deserialized_bytes = np.frombuffer(t.byte_data, dtype=np.float32)
-            test_detections.append(np.asarray(deserialized_bytes))
+            detections.append(np.asarray(deserialized_bytes))
 
-        print(test_detections)
+        print(detections)
         # convert the bounding boxes
         new_list = []
-        for index, item in enumerate(test_detections[2]):
+        for index, item in enumerate(detections[2]):
             if index % 4 == 0:
-                new_list.append(test_detections[2][index - 4:index])
-        test_detections[2] = new_list[1:]
+                new_list.append(detections[2][index - 4:index])
+        detections[2] = new_list[1:]
 
         # get objects, scores, bboxes
-        objects = test_detections[0]
-        scores = test_detections[1]
+        objects = detections[0]
+        scores = detections[1]
         bounding_boxes = new_list[1:]
 
         print(objects)
@@ -179,6 +181,7 @@ def resize_short_within(img, short=512, max_size=1024, mult_base=32, interp=2):
     img = cv2.resize(img, (new_w, new_h),
                      interpolation=_get_interp_method(interp, (h, w, new_h, new_w)))
     return img
+
 
 if __name__ == '__main__':
     run()
