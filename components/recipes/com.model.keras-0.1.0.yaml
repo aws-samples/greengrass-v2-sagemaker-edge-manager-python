@@ -12,6 +12,6 @@ Manifests:
       Install: |-
         tar xf {artifacts:path}/keras-model-1.0.tar.gz
     Artifacts:
-      - URI: s3://sagemaker-us-west-2-523344958585/models/packaged/keras-model-1.0.tar.gz
-      - URI: s3://sagemaker-us-west-2-523344958585/artifacts/com.model.keras/0.1.0/rush_hour.jpg
-      - URI: s3://sagemaker-us-west-2-523344958585/artifacts/com.model.keras/0.1.0/rush_hour.jpg.license
+      - URI: s3://YOUR_BUCKET_NAME/models/packaged/keras-model-1.0.tar.gz
+      - URI: s3://YOUR_BUCKET_NAME/artifacts/com.model.keras/0.1.0/rush_hour.jpg
+      - URI: s3://YOUR_BUCKET_NAME/artifacts/com.model.keras/0.1.0/rush_hour.jpg.license

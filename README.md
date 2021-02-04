@@ -12,10 +12,15 @@ Ensure you have AWS CLI installed, a IAM user with an access key, and a named pr
 
 ### Define key variables
 > NOTE: In this demo, we are using a NVIDIA Xavier NX / AGX Xavier development kit. Please adjust PLATFORM as required for your device.
+
+Valid PLATFORM options include linux-armv8, linux-x64, windows-x86, and windows-x64.
+
+Valid TARGET_DEVICE options can be found here: [Supported edge devices for SageMaker Neo](https://docs.aws.amazon.com/sagemaker/latest/dg/neo-supported-devices-edge.html).
 ```console
 export AWS_PROFILE=<PROFILE-NAME>
 export AWS_REGION=<REGION>
 export PLATFORM=linux-armv8
+export TARGET_DEVICE=jetson_xavier
 export SSH_USER=<USER>
 export SSH_HOST=<IP_ADDRESS>
 export IOT_THING_NAME=<THING_NAME>
