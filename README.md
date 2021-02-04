@@ -66,7 +66,7 @@ export SM_ROLE_NAME=smem-role
 
 ### Add SageMaker Edge Manager agent binary to artifacts
 ```console
-./scripts/add_agent_artifact.sh $AWS_PROFILE $PLATFORM 0.1.0
+./scripts/add_agent_artifact.sh $AWS_PROFILE $PLATFORM 0.1.0 $AWS_REGION
 ```
 
 ### Compile and add SageMaker Edge Manager Python client stubs to artifacts

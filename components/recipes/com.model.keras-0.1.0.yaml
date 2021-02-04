@@ -1,0 +1,17 @@
+---
+RecipeFormatVersion: 2020-01-25
+ComponentName: com.model.keras
+ComponentVersion: 0.1.0
+ComponentDescription: A demo Keras model for SageMaker Edge Manager.
+ComponentPublisher: Amazon Web Services, Inc.
+Manifests:
+  - Platform:
+      os: linux
+      architecture: aarch64
+    Lifecycle:
+      Install: |-
+        tar xf {artifacts:path}/keras-model-1.0.tar.gz
+    Artifacts:
+      - URI: s3://sagemaker-us-west-2-523344958585/models/packaged/keras-model-1.0.tar.gz
+      - URI: s3://sagemaker-us-west-2-523344958585/artifacts/com.model.keras/0.1.0/rush_hour.jpg
+      - URI: s3://sagemaker-us-west-2-523344958585/artifacts/com.model.keras/0.1.0/rush_hour.jpg.license
