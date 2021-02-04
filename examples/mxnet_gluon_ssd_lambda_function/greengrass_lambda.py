@@ -36,7 +36,9 @@ tensor_name = 'data'
 #tensor_shape = [1, 3, 416, 416]
 tensor_shape = [1, 3, 512, 512]
 input_size = 512
-object_categories = ['Empty Container', 'Trash', 'Plastic Tray', 'Part']
+object_categories = ['aeroplane', 'bicycle', 'bird', 'boat', 'bottle', 'bus', 'car', 'cat', 
+                     'chair', 'cow', 'diningtable', 'dog', 'horse', 'motorbike', 'person', 
+                     'pottedplant', 'sheep', 'sofa', 'train', 'tvmonitor']
 #img_url = '/greengrass-ml/images/darknet_original.bmp'
 
 # Mean and Std deviation of the RGB colors (collected from Imagenet dataset)
