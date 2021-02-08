@@ -1,5 +1,5 @@
 # Python SageMaker Edge Manager Agent + Greengrass V2 Example
-This example uses boto3 APIs to create a model that we can deploy to an edge device. For deployment of artifacts using Greengrass V2, this will walk you through the steps that you can follow in the AWS Console. If you want to use AWSCLI instead, please follow this README.md. 
+This example uses boto3 APIs to create a model that we can deploy to an edge device. For deployment of artifacts using Greengrass V2, this will walk you through the steps that you can follow in the AWS Console. If you want to use AWSCLI instead, please follow this https://github.com/aws-samples/greengrass-v2-sagemaker-edge-manager-python/blob/main/README.md. 
 
 ## Pre-Requisites
 To run this example end to end, you will need an edge device (NVIDIA Jetson TX2/Xavier) that has internet connectivity. To start with, clone this repo and open sagemaker_edge_example.ipynb on either Sagemaker Studio instance or on Classic Jupyter Notebook instance in Sagemaker. 
