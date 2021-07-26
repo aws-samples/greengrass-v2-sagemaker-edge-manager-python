@@ -1,4 +1,4 @@
-if [ $# -ne 4 ]; then
+if [ $# -ne 5 ]; then
   echo 1>&2 "Usage: $0 AWS-PROFILE-NAME S3-BUCKET AWS-REGION SAGEMAKER-ROLE-NAME TARGET-DEVICE"
   exit 3
 fi

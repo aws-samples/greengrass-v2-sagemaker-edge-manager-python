@@ -57,7 +57,7 @@ def run():
         scaled_frame[2, :] = scaled_frame[2, :] / std[2]
 
         request = PredictRequest(name=model_name, tensors=[Tensor(tensor_metadata=TensorMetadata(
-            name=tensor_name, data_type=5, shape=tensor_shape), byte_data=scaled_frame.tobytes())])
+            name=bytes(tensor_name, 'utf-8'), data_type=5, shape=tensor_shape), byte_data=scaled_frame.tobytes())])
 
         response = edge_manager_client.Predict(request)
 
