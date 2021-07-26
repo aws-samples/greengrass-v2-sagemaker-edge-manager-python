@@ -8,8 +8,8 @@ ComponentDependencies:
   aws.greengrass.TokenExchangeService:
     VersionRequirement: '>=0.0.0'
     DependencyType: HARD
-  aws.sagemaker.edgeManager:
-    VersionRequirement: '~0.1.0'
+  aws.greengrass.SageMakerEdgeManager:
+    VersionRequirement: '>=1.0.2'
     DependencyType: HARD
   com.model.darknet:
     VersionRequirement: '~0.1.0'

@@ -88,24 +88,11 @@ pip install --upgrade protobuf
 
 ### Update recipes
 * In all of the recipe files, replace **YOUR_BUCKET_NAME** with the value assigned to $BUCKET_NAME
-* Run the following to get your AWS account number
-```console
-aws sts get-caller-identity --profile $AWS_PROFILE | jq -r '.Account'
-```
-* In components/recipe/aws.sagemaker.edgeManager-0.1.0.yaml, update the endpoint with your region and account number:
-```yaml
-endpoint: arn:aws:iot:<AWS_REGION>:<ACCOUNT_NUMBER>:rolealias/SageMakerEdge-ggv2-smem-fleet
-```
 
-* In components/recipe/aws.sagemaker.edgeManager-0.1.0.yaml, update the URI with your region:
-```yaml
-- URI: s3://YOUR_BUCKET_NAME/artifacts/aws.sagemaker.edgeManager/0.1.0/<AWS_REGION>.pem
-```
 
 ### Upload your custom components to S3 bucket
 ```console
 ./scripts/upload_component_version.sh $AWS_PROFILE com.model.darknet 0.1.0 $BUCKET_NAME $AWS_REGION
-./scripts/upload_component_version.sh $AWS_PROFILE aws.sagemaker.edgeManager 0.1.0 $BUCKET_NAME $AWS_REGION 
 ./scripts/upload_component_version.sh $AWS_PROFILE aws.sagemaker.edgeManagerPythonClient 0.1.0 $BUCKET_NAME $AWS_REGION
 ```
 
@@ -115,12 +102,33 @@ endpoint: arn:aws:iot:<AWS_REGION>:<ACCOUNT_NUMBER>:rolealias/SageMakerEdge-ggv2
 ./delete_component.sh $AWS_PROFILE <COMPONENT-NAME> <COMPONENT-VERSION> $AWS_REGION
 ```
 
-### Update your Greengrass v2 deployment
+## Create/Update your Greengrass v2 deployment
 
 Create a new Greengrass v2 deployment, including the following components:
-* com.model.darknet v0.1.0
-* aws.sagemaker.edgeManager v0.1.0
-* aws.sagemaker.edgeManagerPythonClient v0.1.0
+* com.model.darknet (v0.1.0)
+* aws.greengrass.SageMakerEdgeManager (>=1.0.2)
+* aws.sagemaker.edgeManagerPythonClient (v0.1.0)
+
+### Configure SageMaker Edge Manager public component
+
+Configure the **aws.greengrass.SageMakerEdgeManager** component, and use the following JSON as the **Configuration to merge** value. Be sure to update the ```BucketName``` attribute.
+
+```json
+{
+  "CaptureDataPeriodicUpload": "false",
+  "CaptureDataPeriodicUploadPeriodSeconds": "8",
+  "DeviceFleetName": "ggv2-smem-fleet",
+  "BucketName": "<YOUR_BUCKET_NAME>",
+  "CaptureDataBase64EmbedLimit": "3072",
+  "CaptureDataPushPeriodSeconds": "4",
+  "SagemakerEdgeLogVerbose": "false",
+  "CaptureDataBatchSize": "10",
+  "CaptureDataDestination": "Cloud",
+  "FolderPrefix": "sme-capture",
+  "UnixSocketName": "/tmp/sagemaker_edge_agent_example.sock",
+  "CaptureDataBufferSize": "30"
+}
+```
 
 ## Security
 
