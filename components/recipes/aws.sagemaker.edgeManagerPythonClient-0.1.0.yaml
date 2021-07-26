@@ -21,7 +21,7 @@ Manifests:
     Lifecycle:
       run:
         script: |-
-          sleep 5 && sudo python3 {artifacts:path}/edge_manager_python_client.py {artifacts:path}/example_image.jpg
+          sleep 5 && sudo python3 {artifacts:path}/edge_manager_python_client.py {artifacts:path}/rush_hour.jpg
     Artifacts:
       - URI: s3://YOUR_BUCKET_NAME/artifacts/aws.sagemaker.edgeManagerPythonClient/0.1.0/edge_manager_python_client.py
         Permission:
@@ -36,5 +36,5 @@ Manifests:
         Permission:
           Execute: OWNER
       - URI: s3://YOUR_BUCKET_NAME/artifacts/aws.sagemaker.edgeManagerPythonClient/0.1.0/rush_hour.jpg.license
-          Permission:
-            Execute: OWNER
+        Permission:
+          Execute: OWNER
