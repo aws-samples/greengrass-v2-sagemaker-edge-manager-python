@@ -50,7 +50,7 @@ export SM_ROLE_NAME=smem-role
 
 ### Compile model with SageMaker Neo
 ```console
-./scripts/create_neo_compilation_job.sh $AWS_PROFILE $BUCKET_NAME $AWS_REGION $SM_ROLE_NAME
+./scripts/create_neo_compilation_job.sh $AWS_PROFILE $BUCKET_NAME $AWS_REGION $SM_ROLE_NAME $TARGET_DEVICE
 ```
 
 ### Package Neo model in SageMaker Edge Manager
