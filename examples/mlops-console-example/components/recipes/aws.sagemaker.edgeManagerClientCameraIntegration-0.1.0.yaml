@@ -1,0 +1,44 @@
+---
+RecipeFormatVersion: "2020-01-25"
+ComponentName: "aws.sagemaker.edgeManagerClientCameraIntegration"
+ComponentVersion: "0.1.0"
+ComponentType: "aws.greengrass.generic"
+ComponentDescription: "Deploys Edge Manager client with rtsp stream"
+ComponentPublisher: "Amazon Web Services, Inc."
+ComponentConfiguration:
+  DefaultConfiguration:
+    accessControl:
+      aws.greengrass.ipc.mqttproxy:
+        aws.sagemaker.edgeManagerClientCameraIntegration:pubsub:1:
+          policyDescription: "Allows access to publish to em/inference"
+          operations:
+          - "aws.greengrass#PublishToIoTCore"
+          resources:
+          - "em/inference"
+    rtspStreamURL: "rtspt://<stream URL>"
+    modelComponentName: "mobilenetv2_224_quantized_model_component"
+    modelName: "mobilenetv2-224-10-quant"
+    quantization: "True"
+    captureData: "False"
+Manifests:
+- Platform:
+    os: "linux"
+    architecture: "aarch64"
+  Lifecycle:
+    run:
+      script: "sleep 5 && python3 -u {artifacts:path}/camera_integration_edgemanger_client.py\
+        \ -s '{configuration:/rtspStreamURL}' -c '{configuration:/modelComponentName}'\
+        \ -m '{configuration:/modelName}' -q '{configuration:/quantization}'\
+        \ -a '{configuration:/captureData}'"
+      RequiresPrivilege: true
+  Artifacts:
+  - Uri: "s3://<YOUR BUCKET NAME>/artifacts/aws.sagemaker.edgeManagerClientCameraIntegration/0.1.0/camera_integration_edgemanger_client.py"
+    Permission:
+      Execute: OWNER
+  - URI: "s3://<YOUR BUCKET NAME>/artifacts/aws.sagemaker.edgeManagerClientCameraIntegration/0.1.0/agent_pb2.py"
+    Permission:
+      Execute: OWNER
+  - URI: "s3://<YOUR BUCKET NAME>/artifacts/aws.sagemaker.edgeManagerClientCameraIntegration/0.1.0/agent_pb2_grpc.py"
+    Permission:
+      Execute: OWNER
+Lifecycle: {}
