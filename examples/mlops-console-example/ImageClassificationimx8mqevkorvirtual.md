@@ -38,7 +38,7 @@ You will need to build a Linux image for the i.MX8MQEVK that includes AWS IoT Gr
 ## **Clone the Example on Host**
 
 ```
-git clone https://github.com/dhwalters423/greengrass-v2-sagemaker-edge-manager-python
+git clone https://github.com/aws-samples/greengrass-v2-sagemaker-edge-manager-python
 ```
 
 ## **Create or edit an IoT Role Alias for SageMaker Edge Manager**
