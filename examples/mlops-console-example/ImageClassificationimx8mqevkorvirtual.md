@@ -521,3 +521,41 @@ Click on 'View device fleet operating status'
 
 ## **Conclusion**
 With AWS IoT Greengrass v2 and Amazon SageMaker, you can build models in the cloud, deploy them to the edge, and monitor them in the cloud. This completes the full Machine Learning Operations pipeline to manage your IoT ML fleets at scale.
+
+
+## Clean up
+When you are done with this workshop example, you should clean up the AWS resources in your account to prevent any additional costs. 
+
+### Device
+First, shutdown AWS IoT Greengrass on the device. Run the following command on the device to stop Greengrass from running and prevent it from starting up on device reboot:
+```
+sudo systemctl stop greengrass
+sudo systemctl disable greengrass
+```
+
+This stops data from being published to AWS IoT Core, SageMaker Edge Manager S3 bucket uploads, and the application to stop running.
+
+### Storage of Inference Results
+Delete Amazon S3 buckets containing inference data by following the instructions [in documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/delete-bucket.html) on the bucket named ```<unique-uuid>-sagemaker-inference-results```.
+
+### AWS IoT Greengrass
+You might also wish to delete the AWS IoT Greengrass cloud resources. Leaving them provisioned in AWS IoT will not incur additional charges.
+
+#### Delete the Core
+From the host machine run the following command:
+```
+aws greengrassv2 delete-core-device --core-device-thing-name MyGreengrassCore
+```
+Replace 'MyGreengrassCore' with the IoT Thing Name of your Greengrass device.
+
+#### Delete the Components
+Delete Amazon S3 buckets containing inference data by following the instructions [in documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/delete-bucket.html) on the bucket named ```<unique-uuid>-gg-components```.
+
+Navigate to **AWS IoT Console --> Greengrass --> Components**
+Click on 'aws.sagemakerEdgeManagerPythonClient' and then 'Delete version' then confirm by clicking 'Delete'
+Click on 'SMEM-Image-Classification-Model' and then 'Delete version' then confirm by clicking 'Delete'
+
+### Delete SageMaker Edge Manager resources
+
+Navigate to **Amazon SageMaker Console --> Edge Manager --> Edge devices**
+Click on the device name to delete, and then click on 'Deregister'. Follow the prompt to deregister the device.
