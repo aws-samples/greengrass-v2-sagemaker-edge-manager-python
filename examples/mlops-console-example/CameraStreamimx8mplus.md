@@ -494,10 +494,13 @@ Replace 'MyGreengrassCore' with the IoT Thing Name of your Greengrass device.
 Delete Amazon S3 buckets containing inference data by following the instructions [in documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/delete-bucket.html) on the bucket named ```<unique-uuid>-gg-components```.
 
 Navigate to **AWS IoT Console --> Greengrass --> Components**
+
 Click on 'aws.sagemaker.edgeManagerClientCameraIntegration' and then 'Delete version' then confirm by clicking 'Delete'
+
 Click on 'mobilenetv2_224_quantized_model_component' and then 'Delete version' then confirm by clicking 'Delete'
 
 ### Delete SageMaker Edge Manager resources
 
 Navigate to **Amazon SageMaker Console --> Edge Manager --> Edge devices**
+
 Click on the device name to delete, and then click on 'Deregister'. Follow the prompt to deregister the device.
