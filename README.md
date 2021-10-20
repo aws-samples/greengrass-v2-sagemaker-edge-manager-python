@@ -2,6 +2,8 @@
 
 This code sample demonstrates how to integrate SageMaker Edge Manager with Greengrass v2 via components. At the end of the sample, you will have a Python-based component running inference at the edge with the SageMaker Edge Manager binary agent, and a YOLOv3 Darknet model.
 
+In the folder examples/mlops-console-example there are two additional examples that use SageMaker Edge Manager and Greengrass v2 to implement a machine learning operations flow on NXP or virtual devices. They include step by step implementation instructions from the AWS Console.
+
 ### AWS CLI setup
 
 Ensure you have AWS CLI installed, a IAM user with an access key, and a named profile configured:
