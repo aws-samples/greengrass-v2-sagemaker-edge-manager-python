@@ -10,14 +10,14 @@ This is an advanced workshop intended for those already familiar with basic AWS 
 
 This workshop must be run on an NXP i.MX 8M Plus EVK.
 
-You will need to build a Linux image for the i.MX8MPEVK that includes AWS IoT Greengrass V2. Follow the steps outlined in [https://github.com/aws-samples/meta-aws-demos/tree/master/nxp-imx8m/aws-iot-greengrass-v2](https://github.com/aws-samples/meta-aws-demos/tree/master/nxp/imx8m) to include the Greengrass V2 software with your [i.MX Yocto Linux build](https://www.nxp.com/docs/en/user-guide/IMX_YOCTO_PROJECT_USERS_GUIDE.pdf). This image will include all necessary dependencies to run this workshop.
+You will need to build a Linux image for the i.MX8MPEVK that includes AWS IoT Greengrass V2. Follow the steps outlined in [https://github.com/aws-samples/meta-aws-demos/tree/master/nxp/imx8m](https://github.com/aws-samples/meta-aws-demos/tree/master/nxp/imx8m) to include the Greengrass V2 software with your [i.MX Yocto Linux build](https://www.nxp.com/docs/en/user-guide/IMX_YOCTO_PROJECT_USERS_GUIDE.pdf). This image will include all necessary dependencies to run this workshop.
 
 ![Greengrass Core](images/GGCore.png)
 
 **Requirements:**
 
 * NXP i.MX8MPEVK with [AWS IoT Greengrass V2](https://docs.aws.amazon.com/greengrass/v2/developerguide/install-greengrass-core-v2.html) installed
-    * Follow the instructions here: [https://github.com/aws-samples/meta-aws-demos/tree/master/nxp-imx8m/aws-iot-greengrass-v2](https://github.com/aws-samples/meta-aws-demos/tree/master/nxp-imx8m/aws-iot-greengrass-v2) to build an image for the i.MX8MPEVK with all required dependencies.
+    * Follow the instructions here: [https://github.com/aws-samples/meta-aws-demos/tree/master/nxp/imx8m](https://github.com/aws-samples/meta-aws-demos/tree/master/nxp/imx8m) to build an image for the i.MX8MPEVK with all required dependencies.
 * A certificate and private key provisioned to your device.
 * Your device is connected and appears as a Greengrass Core device in AWS IoT Greengrass cloud service. 
 * The Greengrass device has an IoT Thing Name that matches the regex: ``^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$`` due to SageMaker Edge Manager limitation
