@@ -41,6 +41,29 @@ You will need to build a Linux image for the i.MX8MQEVK that includes AWS IoT Gr
 git clone https://github.com/aws-samples/greengrass-v2-sagemaker-edge-manager-python
 ```
 
+## **Setup workshop resources automatically**
+
+The following script will setup some necessary resources automatically, as long as you have already set up your AWS IoT Greengrass Core device per the pre-requisites. If you wish to perform these steps manually from the console, or have not set up an IoT Role Alias for your Greengrass device, you should skip this step and proceed to **Create or edit an IoT Role Alias for SageMaker Edge Manager**.
+
+Run the following script to perform the following:
+* Modify an existing IoT Role Alias IAM Role with the correct permissions for the workshop
+* Create an Amazon S3 bucket for edge inference results
+* Create an Amazon S3 bucket for Greengrass components
+* Create an Edge Manager Fleet
+* Register your Greengrass Core as a device in Edge Manager
+
+```
+cd ~/greengrass-v2-sagemaker-edge-manager-python/examples/mlops-console-example/scripts
+sh setupresources.sh <ROLE ALIAS> <IOT THING NAME> <REGION>
+```
+ * Replace ``<ROLE ALIAS>`` with the name of your AWS IoT Role Alias that your Greengrass device is configured to use.
+ * Replace ``<IOT THING NAME>`` with the IoT Thing Name of your Greengrass Core device
+ * Replace ``<REGION>`` with the region in which your Greengrass device is connected
+
+Once the script has successfully completed, you can skip to the step **Deploy the SageMaker Edge Manager Agent Greengrass component to the device**.
+
+If you wish to perform these steps manually, follow the steps below.
+
 ## **Create or edit an IoT Role Alias for SageMaker Edge Manager**
 
 The SageMaker Edge Manager Agent on the device will need to access resources in the Cloud. It uses the AWS IoT Credential Provider Role Alias to perform actions. 
