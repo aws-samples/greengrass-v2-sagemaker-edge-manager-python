@@ -63,11 +63,11 @@ echo "Creating Greengrass components bucket: $GG_COMPONENTS_BUCKET_NAME"
 aws s3 mb s3://$GG_COMPONENTS_BUCKET_NAME --region $REGION
 
 # Create device fleet
-echo "Creating Edge Manager device fleet"
+echo "Creating Edge Manager device fleet $DEVICE_FLEET_NAME"
 aws sagemaker create-device-fleet --region $REGION --device-fleet-name $DEVICE_FLEET_NAME \
   --role-arn $IAM_ROLE_ARN --output-config "{\"S3OutputLocation\":\"s3://$EDGE_INFERENCE_BUCKET_NAME\"}"
 
 # Register device
-echo "Registering GG Core device to Edge Manager device fleet"
+echo "Registering GG Core device $IOT_THING_NAME to Edge Manager device fleet"
 aws sagemaker register-devices --region $REGION --device-fleet-name $DEVICE_FLEET_NAME \
   --devices "[{\"DeviceName\":\"$DEVICE_NAME\",\"IotThingName\":\"$IOT_THING_NAME\"}]"
