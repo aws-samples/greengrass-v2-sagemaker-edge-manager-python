@@ -1,5 +1,5 @@
 #
-# Copyright 2010-2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2010-2022 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 import cv2
 import numpy as np
